@@ -156,24 +156,6 @@
     .btn-ghost { background: transparent; color: var(--pink-bright); }
     .btn-ghost:hover { background: var(--pink); color: var(--white); }
 
-    .scroll-line {
-      position: absolute;
-      bottom: 40px; left: 48px;
-      display: flex; align-items: center; gap: 12px;
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: #777;
-    }
-    .scroll-line::before {
-      content: '';
-      display: block;
-      width: 40px; height: 1px;
-      background: var(--pink-bright);
-      animation: lineGrow 1.5s 1s ease-in-out infinite alternate;
-    }
-    @keyframes lineGrow { from { width: 20px; } to { width: 60px; } }
-
     section { padding: 100px 48px; }
 
     .section-label {
@@ -461,7 +443,6 @@
         <a href="#projects" class="btn btn-primary">View Projects</a>
         <a href="#blog" class="btn btn-ghost">Read Blog</a>
       </div>
-      <div class="scroll-line">Scroll</div>
     </section>
 
     <section id="about">
