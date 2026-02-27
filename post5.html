@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Notes on building in public — Blog</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..32,400;0,9..32,500;0,9..32,700;1,9..32,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --black: #1c1c1e;
+      --pink: #580130;
+      --pink-bright: #8a0248;
+      --pink-dim: #58013022;
+      --pink-mid: #58013055;
+      --white: #ffffff;
+      --gray: #272729;
+      --gray2: #38383a;
+      --mono: 'Space Mono', monospace;
+      --sans: 'Syne', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 17px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    .cursor {
+      width: 12px; height: 12px;
+      background: var(--pink-bright);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s;
+    }
+    .cursor-ring {
+      width: 36px; height: 36px;
+      border: 1px solid var(--pink-bright);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      opacity: 0.5;
+    }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 48px;
+      z-index: 100;
+      border-bottom: 1px solid #ffffff10;
+      backdrop-filter: blur(16px);
+      background: #1c1c1eee;
+    }
+    .nav-logo {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--pink-bright); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      cursor: none;
+    }
+    .nav-links a:hover { color: var(--pink-bright); }
+
+    /* BLOG POST PAGE */
+    #blog-post-page {
+      min-height: 100vh;
+      padding: 120px 48px 80px;
+    }
+    .post-inner { max-width: 740px; margin: 0 auto; }
+    .post-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #aaa;
+      text-decoration: none;
+      margin-bottom: 56px;
+      cursor: none;
+      transition: color 0.2s;
+    }
+    .post-back:hover { color: var(--pink-bright); }
+    .post-tag { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--pink-bright); margin-bottom: 16px; }
+    .post-title {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 800;
+      font-size: clamp(28px, 4vw, 52px);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .post-meta { font-size: 0.7rem; color: #777; margin-bottom: 48px; }
+    .post-divider { height: 1px; background: var(--gray2); margin-bottom: 48px; }
+    .post-body { font-family: 'DM Sans', sans-serif; font-size: 1.05rem; line-height: 2; color: #ddd; }
+    .post-body h2 {
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: var(--white);
+      margin: 48px 0 16px;
+      letter-spacing: -0.02em;
+    }
+    .post-body p { margin-bottom: 20px; }
+    .post-body strong { color: var(--pink-bright); }
+    .post-body code {
+      background: var(--gray);
+      border: 1px solid var(--gray2);
+      padding: 2px 8px;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--gray2);
+      padding: 24px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.65rem;
+      color: #666;
+      letter-spacing: 0.1em;
+    }
+    footer span { text-transform: uppercase; }
+    .dot { color: var(--pink-bright); }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      #blog-post-page { padding: 100px 24px 60px; }
+      footer { padding: 20px 24px; flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">YN<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#blog">Blog</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section id="blog-post-page">
+    <div class="post-inner">
+      <a href="index.html#blog" class="post-back">← Back to blog</a>
+      <div class="post-tag">Process</div>
+      <h1 class="post-title">Notes on building in public</h1>
+      <div class="post-meta">October 2024 &nbsp;·&nbsp; 5 min read</div>
+      <div class="post-divider"></div>
+      <div class="post-body">
+        <p>I've been building in public for a few months. Here are my honest notes on what it's actually like.</p>
+        <h2>What it actually means</h2>
+        <p>It doesn't mean sharing everything. It means sharing enough that others can learn from your process.</p>
+        <h2>The uncomfortable parts</h2>
+        <p>Shipping something half-finished is uncomfortable. Do it anyway.</p>
+        <h2>What I've gotten out of it</h2>
+        <p>Accountability, earlier feedback, and a few unexpected connections with people working on similar things.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2025 Your Name</span>
+    <span>Built with care<span class="dot">.</span></span>
+  </footer>
+
+  <script>
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top = my + 'px';
+    });
+    (function animateRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px';
+      ring.style.top = ry + 'px';
+      requestAnimationFrame(animateRing);
+    })();
+    document.addEventListener('mouseover', e => {
+      const big = !!e.target.closest('a, button');
+      cursor.style.width = big ? '20px' : '12px';
+      cursor.style.height = big ? '20px' : '12px';
+    });
+  </script>
+</body>
+</html>
+

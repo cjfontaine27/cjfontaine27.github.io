@@ -179,7 +179,7 @@
     .section-title {
       font-family: var(--sans);
       font-weight: 800;
-      font-size: clamp(28px, 6vw, 96px);
+      font-size: clamp(26px, 5.5vw, 84px);
       letter-spacing: -0.03em;
       margin-bottom: 64px;
       line-height: 1.05;
@@ -304,7 +304,7 @@
     .contact-big {
       font-family: var(--sans);
       font-weight: 800;
-      font-size: clamp(36px, 6vw, 80px);
+      font-size: clamp(34px, 5.5vw, 72px);
       letter-spacing: -0.04em;
       margin: 32px 0;
       line-height: 1;
@@ -355,7 +355,7 @@
     .post-back:hover { color: var(--pink-bright); }
     .post-tag { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--pink-bright); margin-bottom: 16px; }
     .post-title {
-      font-family: var(--sans);
+      font-family: 'DM Sans', sans-serif;
       font-weight: 800;
       font-size: clamp(28px, 4vw, 52px);
       letter-spacing: -0.03em;
@@ -510,11 +510,11 @@
       <div class="section-label">Writing</div>
       <h2 class="section-title reveal">Thoughts &amp;<br/><em style="color:var(--pink-bright);font-style:italic;">write-ups.</em></h2>
       <div class="blog-list">
-        <a href="#" class="blog-item reveal" onclick="openPost('post1'); return false;"><span class="blog-date">Feb 2025</span><span class="blog-title">How I built X and what I learned from it</span><span class="blog-tag">Engineering</span></a>
-        <a href="#" class="blog-item reveal" onclick="openPost('post2'); return false;"><span class="blog-date">Jan 2025</span><span class="blog-title">A deep dive into something I found fascinating</span><span class="blog-tag">Research</span></a>
-        <a href="#" class="blog-item reveal" onclick="openPost('post3'); return false;"><span class="blog-date">Dec 2024</span><span class="blog-title">Lessons from shipping my first open source project</span><span class="blog-tag">Reflection</span></a>
-        <a href="#" class="blog-item reveal" onclick="openPost('post4'); return false;"><span class="blog-date">Nov 2024</span><span class="blog-title">Why I think most devs should write more</span><span class="blog-tag">Opinion</span></a>
-        <a href="#" class="blog-item reveal" onclick="openPost('post5'); return false;"><span class="blog-date">Oct 2024</span><span class="blog-title">Notes on building in public</span><span class="blog-tag">Process</span></a>
+        <a href="post1.html" class="blog-item reveal"><span class="blog-date">Feb 2025</span><span class="blog-title">How I built X and what I learned from it</span><span class="blog-tag">Engineering</span></a>
+        <a href="post2.html" class="blog-item reveal"><span class="blog-date">Jan 2025</span><span class="blog-title">A deep dive into something I found fascinating</span><span class="blog-tag">Research</span></a>
+        <a href="post3.html" class="blog-item reveal"><span class="blog-date">Dec 2024</span><span class="blog-title">Lessons from shipping my first open source project</span><span class="blog-tag">Reflection</span></a>
+        <a href="post4.html" class="blog-item reveal"><span class="blog-date">Nov 2024</span><span class="blog-title">Why I think most devs should write more</span><span class="blog-tag">Opinion</span></a>
+        <a href="post5.html" class="blog-item reveal"><span class="blog-date">Oct 2024</span><span class="blog-title">Notes on building in public</span><span class="blog-tag">Process</span></a>
       </div>
     </section>
 
@@ -540,72 +540,8 @@
 
   </div><!-- end #main-site -->
 
-  <!-- BLOG POST PAGE -->
-  <div id="blog-post-page">
-    <div class="post-inner">
-      <a href="#" class="post-back" onclick="showMain('blog'); return false;">← Back to blog</a>
-      <div id="post-content"></div>
-    </div>
-  </div>
-
   <script>
-    const posts = {
-      post1: {
-        tag: 'Engineering', title: 'How I built X and what I learned from it', date: 'February 2025',
-        body: `<p>Write your blog post content here. This is a placeholder — replace it with your actual writing.</p>
-        <h2>The Problem</h2><p>Start by explaining what problem you were trying to solve. Give context so readers understand why this project mattered.</p>
-        <h2>The Approach</h2><p>Describe how you thought about solving it. What technologies did you use? What tradeoffs did you make? Use <code>inline code</code> for technical terms.</p>
-        <h2>What I Learned</h2><p>This is the most valuable part. What would you do differently? What surprised you?</p>
-        <p><strong>Key takeaway:</strong> Write it here in a sentence or two.</p>`
-      },
-      post2: {
-        tag: 'Research', title: 'A deep dive into something I found fascinating', date: 'January 2025',
-        body: `<p>Write your blog post content here. Replace this placeholder with your actual writing.</p>
-        <h2>Background</h2><p>Set the scene. Why did you start exploring this topic? What drew you in?</p>
-        <h2>What I Found</h2><p>Share the interesting stuff. Don't hold back on the details.</p>
-        <h2>Further Reading</h2><p>Link out to resources that helped you along the way.</p>`
-      },
-      post3: {
-        tag: 'Reflection', title: 'Lessons from shipping my first open source project', date: 'December 2024',
-        body: `<p>Shipping something publicly is a different experience than building for yourself. Here's what I learned.</p>
-        <h2>Lesson 1</h2><p>Replace this with your actual reflections. Be specific — vague lessons aren't useful.</p>
-        <h2>Lesson 2</h2><p>Another thing I wish I'd known before starting.</p>
-        <h2>Would I do it again?</h2><p>Yes, and here's why...</p>`
-      },
-      post4: {
-        tag: 'Opinion', title: 'Why I think most devs should write more', date: 'November 2024',
-        body: `<p>Writing is thinking. When you write about what you're building, you understand it better.</p>
-        <h2>Writing forces clarity</h2><p>If you can't explain it simply, you don't understand it yet.</p>
-        <h2>It compounds over time</h2><p>Every post is a record of where you were. Looking back shows you how much you've grown.</p>
-        <h2>It helps other people</h2><p>That thing you figured out after hours of struggle? Someone else is struggling with it right now.</p>`
-      },
-      post5: {
-        tag: 'Process', title: 'Notes on building in public', date: 'October 2024',
-        body: `<p>I've been building in public for a few months. Here are my honest notes on what it's actually like.</p>
-        <h2>What it actually means</h2><p>It doesn't mean sharing everything. It means sharing enough that others can learn from your process.</p>
-        <h2>The uncomfortable parts</h2><p>Shipping something half-finished is uncomfortable. Do it anyway.</p>
-        <h2>What I've gotten out of it</h2><p>Accountability, earlier feedback, and a few unexpected connections with people working on similar things.</p>`
-      }
-    };
-
-    function openPost(id) {
-      const post = posts[id];
-      if (!post) return;
-      document.getElementById('post-content').innerHTML = `
-        <div class="post-tag">${post.tag}</div>
-        <h1 class="post-title">${post.title}</h1>
-        <div class="post-meta">${post.date} &nbsp;·&nbsp; 5 min read</div>
-        <div class="post-divider"></div>
-        <div class="post-body">${post.body}</div>
-      `;
-      document.getElementById('main-site').style.display = 'none';
-      document.getElementById('blog-post-page').classList.add('active');
-      window.scrollTo(0, 0);
-    }
-
     function showMain(section) {
-      document.getElementById('blog-post-page').classList.remove('active');
-      document.getElementById('main-site').style.display = 'block';
       if (section) {
         setTimeout(() => {
           const el = document.getElementById(section);
