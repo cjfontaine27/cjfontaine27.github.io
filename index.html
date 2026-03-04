@@ -31,6 +31,7 @@
       line-height: 1.6;
       overflow-x: hidden;
       cursor: none;
+      position: relative;
     }
 
     .cursor {
@@ -52,6 +53,15 @@
       z-index: 9998;
       transform: translate(-50%, -50%);
       opacity: 0.5;
+    }
+
+    .noise-svg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.035;
+      mix-blend-mode: soft-light;
+      z-index: 150;
     }
 
     nav {
@@ -159,6 +169,17 @@
     .btn-ghost:hover { background: var(--pink); color: var(--white); }
 
     section { padding: 100px 48px; }
+
+    #hero,
+    #projects,
+    #contact {
+      background: #1c1c1e;
+    }
+
+    #about,
+    #blog {
+      background: #222224;
+    }
 
     .section-label {
       font-size: 1rem;
@@ -336,6 +357,7 @@
       display: none;
       min-height: 100vh;
       padding: 120px 48px 80px;
+      background: #222224;
     }
     #blog-post-page.active { display: block; }
     .post-inner { max-width: 740px; margin: 0 auto; }
@@ -393,6 +415,7 @@
       font-size: 0.65rem;
       color: #666;
       letter-spacing: 0.1em;
+      background: #222224;
     }
     footer span { text-transform: uppercase; }
     .dot { color: var(--pink-bright); }
@@ -421,6 +444,13 @@
 
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
+
+  <svg class="noise-svg" xmlns="http://www.w3.org/2000/svg">
+    <filter id="noiseFilter">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="noStitch"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#noiseFilter)"/>
+  </svg>
 
   <nav>
     <a href="#" class="nav-logo" onclick="showMain(null)">YN<span>.</span></a>
